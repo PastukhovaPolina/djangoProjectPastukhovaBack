@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background: #4B0082">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load  crispy_forms_tags %}
+{% block content %}
+    {{ form.media }}
+<form method='post' class="mx-auto" style = "width: 500px">
+<h1 class="display-2 text-light text-center">Добавить проект</h1>
+{% csrf_token %}
+    <div class="row g-3">
+        <div class="col">
+            {{ form.number|as_crispy_field }}
+    </div>
+        <div class="col">
+            {{ form.evaluation|as_crispy_field }}
+    </div>
+    </div>
+    {{ form.deadline|as_crispy_field }}
+    <div class="text-center">
+        <button type="submit" id="project_button" class="btn btn-success">Добавить проект</button>
+    </div>
+</form>
+    {% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#id_number').keyup(function (){
+            $.ajax(
+                {
+                    data: $(this).serialize(),
+                    url: "{% url 'check_project_number' id_employee %}",
+                    success:
+                    function (response){
+                       if ($('#numberError').length == 0)
+                           $('#id_number').after('<div class="invalid-feedback d-block" id="numberError"></div>');
+
+                        if (response.exist == true) {
+                            $('#id_number').removeClass('is-valid').addClass('is-invalid');
+                            $('#numberError').removeClass('valid-feedback').addClass('invalid-feedback').text("Проект с таким номером уже существует");
+                            $('#project_button').prop('disabled', true);
+                        } else {
+                            $('#id_number').removeClass('is-invalid').addClass('is-valid');
+                            $('#numberError').removeClass('invalid-feedback').addClass('valid-feedback').text("Проект можно добавить");
+                            $('#project_button').prop('disabled', false);
+                        }
+                    },
+                    error: function (response){
+                        console.log(response.responseJSON.errors);
+                    }
+                });
+            return false;
+        });
+    });
+</script>
+{% endblock javascript %}
+{% endblock %}
+</body>
+</html>

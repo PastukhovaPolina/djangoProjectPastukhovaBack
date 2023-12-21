@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о сотруднике</title>
+    {% extends "base.html" %}
+    {% load static %}
+
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/show_info.css' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+{% block content %}
+
+<div class="card">
+    <div class="ds-top"></div>
+    <div class="avatar-holder">
+        <img src="https://www.gravatar.com/avatar/{{ link_img }}?s=100&d=retro" alt="Albert Einstein">
+    </div>
+    <div class="name">
+        {{ employee.first_name }} {{ employee.last_name }}
+    </div>
+    <div class="ds-info">
+        <div class="ds pens">
+            <i class="bi bi-patch-check"></i>
+            <h6 title="Number of pens created by the user">Количество проектов</h6>
+            <p>{{ projects|length }}</p>
+        </div>
+        <div class="ds projects">
+            <i class="bi bi-chat-square-heart"></i>
+            <h6 title="Number of pens created by the user">День рождения</h6>
+            <p>{{ employee.date_birth }}</p>
+        </div>
+        <div class="ds posts">
+            <i class="bi bi-people-fill"></i>
+            <h6 title="Number of pens created by the user">Команда</h6>
+            <p>{{ employee.team }}</p>
+        </div>
+    </div>
+    <table class="table ds-skill"  style="color: #fff; text-align: center">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center">Номер проекта</th>
+                <th scope="col" style="text-align: center">Оценка</th>
+                <th scope="col" style="text-align: center">Срок сдачи</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            {% if project.evaluation >= 7 %}
+            <tr class="table-success">
+                {% elif project.evaluation < 7 %}
+                <tr class="table-danger">
+                    {% else %}
+                    <tr>
+                        {% endif %}
+            <td class="text-center">{{ project.number }}</td>
+            <td class="text-center">{{ project.evaluation }}</td>
+            <td class="text-center">{{ project.deadline }}</td>
+                    </tr>
+                    {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/show_info.css' %}"/>
+</head>
+<header>
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #B0E0E6">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Ваш личный кабинет</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        </li>
+      </ul>
+      <form class="d-flex">
+          <a href="{% url 'logout_user' %}" class="btn btn-danger" type="submit">Выход</a>
+      </form>
+    </div>
+  </div>
+</nav>
+
+</header>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

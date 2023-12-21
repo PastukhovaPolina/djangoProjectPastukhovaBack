@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% extends "base.html" %}
+    {% load static %}
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <div class="mx-auto d-grid gap-2" style="margin-top: 35vh; width: 1000px; height: 150px">
+            <table class="table table-hover bg-light">
+                <thead class="bg-info">
+                    <tr>
+                        <th scope="col text-center">Имя сотрудника</th>
+                        <th scope="col text-center">Последний проект</th>
+                        <th scope="col text-center">Средний балл за все проекты</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for employee, averageEvaluation, lastProject in employees %}
+                        {% if averageEvaluation >= 6 %}
+                            <tr class="bg-success">
+                        {% elif averageEvaluation < 6 %}
+                            <tr class="bg-danger">
+                        {% else %}
+                            <tr>
+                        {% endif %}
+                        <td class = "text-center">{{ employee.first_name }} {{ employee.last_name }}</td>
+
+                        {% with tmp=1 %}
+                        <td class = "text-center">{{ lastProject }}</td>
+                        <td class = "text-center">{{ averageEvaluation }}</td>
+                        {% endwith %}
+                    <td><a href="{% url 'employee_info' id_team employee.id %}" class="btn btn-warning">Открыть</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
