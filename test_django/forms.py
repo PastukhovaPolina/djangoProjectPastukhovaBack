@@ -1,38 +1,5 @@
-from .models import Project
-from django.forms import ModelForm, TextInput, DateInput
-from datetime import date
 from django import forms
-from django.core.exceptions import ValidationError
 from bootstrap_datepicker_plus.widgets import DatePickerInput
-
-
-# class ProjectForm(ModelForm):
-#     class Meta:
-#         model = Project
-#         fields = ['employee', 'office', 'evaluation', 'deadline', 'number']
-#
-#         widgets = {
-#             'employee': TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Работник'
-#             }),
-#             'office': TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Офис'
-#             }),
-#             'evaluation': TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Рейтинг'
-#             }),
-#             'deadline': DateInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Дедлайн'
-#             }),
-#             'number': TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Номер проекта'
-#             }),
-#         }
 
 
 class ProjectForm(forms.Form):

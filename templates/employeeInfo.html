@@ -11,7 +11,7 @@
 </head>
 <body>
 {% block content %}
-
+{% csrf_token %}
 <div class="card">
     <div class="ds-top"></div>
     <div class="avatar-holder">
@@ -43,7 +43,7 @@
                 <th scope="col" style="text-align: center">Номер проекта</th>
                 <th scope="col" style="text-align: center">Оценка</th>
                 <th scope="col" style="text-align: center">Срок сдачи</th>
-                <th></th>
+
             </tr>
         </thead>
         <tbody>

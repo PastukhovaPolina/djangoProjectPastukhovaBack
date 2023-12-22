@@ -29,10 +29,6 @@
   color: #b3b3b3;
   font-size: 12px;
 }
-/*.form .message a {*/
-/*  color: #4CAF50;*/
-/*  text-decoration: none;*/
-/*}*/
 .form .register-form {
   display: none;
 }
@@ -71,7 +67,6 @@
 }
 body {
   background: rgb(25, 25, 112);
-  /*background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);*/
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
